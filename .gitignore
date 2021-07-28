@@ -1,0 +1,17 @@
+.DS_Store
+datasets_new
+.ipynb_checkpoints/*
+__pycache__
+refer/__pycache__
+lib/__pycache__
+*.pdf
+result.txt
+*.bak
+results
+results/results.txt
+results/*.pdf
+dataset/mnist_train.csv
+dataset/mnist_test.csv
+#*.model
+sessions/*
+models/*
