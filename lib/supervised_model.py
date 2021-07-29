@@ -196,8 +196,8 @@ def build_supervised_model( *,
         x = keras.layers.BatchNormalization()(x)
 
 
-    #outputs = keras.layers.Dense(n_classes, activation = 'softmax', name = "newhead_output")(x)
-    outputs = keras.layers.Dense(n_classes, activation = 'sigmoid', name = "newhead_output")(x)
+    outputs = keras.layers.Dense(n_classes, activation = 'softmax', name = "newhead_output")(x)
+    #outputs = keras.layers.Dense(n_classes, activation = 'sigmoid', name = "newhead_output")(x)
 
     model_newhead = keras.Model(inputs = inputs, outputs = outputs, name = "newhead")
 

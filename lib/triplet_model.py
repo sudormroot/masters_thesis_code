@@ -13,18 +13,17 @@ import tensorflow as tf
 from tensorflow import keras
 import keras.backend as K
 
-from mbt_dataset import load_mbt_dataset_as_dataframe, load_mbt_dataset
-from mbt_split import split_mbt_dataset_as_dataframe, split_mbt_dataset
-from imgaug_model import build_augmentation_model
+#from mbt_dataset import load_mbt_dataset_as_dataframe, load_mbt_dataset
+#from mbt_split import split_mbt_dataset_as_dataframe, split_mbt_dataset
+#from imgaug_model import build_augmentation_model
 
+"""
 def generate_triplets(*, 
                       batch_size = 32,
                       output_shape = (128, 128, 3),
                       img_augmenter,
                       X, y):
     
-    """ Generate an un-ending stream of triplets for training or test.
-    """
         
     X = X.astype('float32')
     
@@ -93,7 +92,7 @@ def test_generate_triplets():
         print("|a-n| = ", tf.math.reduce_sum((a - n)**2).numpy())
 
         break
-
+"""
 
 class TripletLossLayer(keras.layers.Layer):
     def __init__(self, alpha=0.2):
@@ -147,7 +146,7 @@ def test_TripletLossLayer():
 def build_triplet_model(*, 
                         #input_shape = (128, 128, 3),
                         alpha = 0.5, 
-                        learning_rate = 0.001 / 2.0,
+                        learning_rate = 0.001,
                         embedding_model):
     
     print()
@@ -175,7 +174,9 @@ def build_triplet_model(*,
     model = keras.Model(inputs=[input_a, input_p, input_n], outputs=dummy)
     
     # compile with no loss, because TripletLossLayer has added the loss
-    model.compile(optimizer=keras.optimizers.Adam(learning_rate, decay = 1e-2 / 50), run_eagerly = False) 
-    
+    #model.compile(optimizer=keras.optimizers.Adam(learning_rate, decay = 1e-2 / 50), run_eagerly = False) 
+    #model.compile(optimizer=keras.optimizers.Adam(learning_rate)) 
+    model.compile(optimizer=keras.optimizers.Adam(learning_rate))  
+
     return model
 

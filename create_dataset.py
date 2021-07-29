@@ -66,8 +66,14 @@ def create_dataset( *,
 
 
 if __name__ == "__main__":
+
+    subdir = "Multiband_Brodatz_Texture"
+
+    if len(sys.argv) == 2:
+        subdir = sys.argv[1]
+
     create_dataset( 
-                    subdir = "Multiband_Brodatz_Texture",
+                    subdir = subdir,
                     dataset_root = "datasets_new",
                     image_size = (512, 512),
                     n_channels = 3,
