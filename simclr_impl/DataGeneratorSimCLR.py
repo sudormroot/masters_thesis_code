@@ -46,6 +46,8 @@ class DataGeneratorSimCLR(data_utils.Sequence):
             dtype=np.float32,
         )
 
+        #print("X.shape = ", X.shape)
+
         indexes = self.indexes[
             index * self.batch_size : (index + 1) * self.batch_size
         ]
@@ -76,6 +78,7 @@ class DataGeneratorSimCLR(data_utils.Sequence):
                 np.asarray((img / 255)).astype("float32")
             )
 
+
             img_T1 = preprocess_for_train(
                 img,
                 self.height,
@@ -101,6 +104,9 @@ class DataGeneratorSimCLR(data_utils.Sequence):
                 img_T1 = preprocess_input(np.asarray(img_T1))
                 img_T2 = preprocess_input(np.asarray(img_T2))
 
+            #print("img_T1.shape = ", img_T1.shape)
+            #print("img_T1.shape = ", img_T1.shape)
+
             # T1-images between 0 -> batch_size - 1
             X[shuffle_a[i]] = img_T1
             # T2-images between batch_size -> 2*batch_size - 1
@@ -113,6 +119,9 @@ class DataGeneratorSimCLR(data_utils.Sequence):
 
         y = tf.concat([labels_ab_aa, labels_ba_bb], 1)
 
+        #print(y)
+
         # [None] is used to silence warning
         # https://stackoverflow.com/questions/59317919/warningtensorflowsample-weight-modes-were-coerced-from-to
-        return list(X), y, [None]
+        return np.array(list(X)), y, [None]
+        #return np.array(list(X)), np.array(y)

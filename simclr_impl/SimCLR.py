@@ -119,6 +119,7 @@ class SimCLR:
         return SimCLR_model
 
     def train(self, data_train, data_val, epochs=10, pr=True):
+    #def train(self, X_train, y_train, X_val = None,y_val = None, epochs=10, pr=True):
         """ Training the SimCLR model and saving best model with time stamp
             Transfers adapted weights to base_model
         """
@@ -132,16 +133,17 @@ class SimCLR:
             data_train,
             epochs=epochs,
             verbose=1,
-            validation_data=data_val,
-            callbacks=[checkpoint, earlyStopping, reduce_lr],
+            #validation_data=data_val,
+            #callbacks=[checkpoint, earlyStopping, reduce_lr],
+            callbacks=[earlyStopping, reduce_lr],
         )
 
         # Print number of trainable weights
-        if pr:
-            self.print_weights()
+        #if pr:
+        #    self.print_weights()
 
         # Save
-        self.save_base_model()
+        #self.save_base_model()
 
     def unfreeze_and_train(
         self,
