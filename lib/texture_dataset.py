@@ -30,12 +30,12 @@ def get_texture_subdirs():
 
     return subdirs
 
-def load_texture_dataset(*, image_size = TEXTURE_DS_IMAGE_SIZE, subdir):
+def load_texture_dataset(*, image_size = TEXTURE_DS_IMAGE_SIZE, dataset_name):
     
-    assert subdir is not None, "The subdir must be specified."
+    assert dataset_name  is not None, "The dataset_name must be specified."
 
     #dataset_path = "datasets_orig" + os.path.sep + "Multiband_Brodatz_Texture"
-    dataset_path = "datasets_orig" + os.path.sep + subdir
+    dataset_path = "datasets_orig" + os.path.sep + dataset_name
 
     assert os.path.exists(dataset_path), f"{dataset_path} does not exist."
 
@@ -97,9 +97,9 @@ def load_texture_dataset(*, image_size = TEXTURE_DS_IMAGE_SIZE, subdir):
     return X, y 
 
 
-def load_texture_dataset_as_dataframe(*, image_size = TEXTURE_DS_IMAGE_SIZE, subdir):
+def load_texture_dataset_as_dataframe(*, image_size = TEXTURE_DS_IMAGE_SIZE, dataset_name):
 
-    X, y = load_texture_dataset(image_size = image_size, subdir = subdir)
+    X, y = load_texture_dataset(image_size = image_size, dataset_name = dataset_name)
     
     data = {"X": list(X),
             "y": list(y)}
@@ -109,16 +109,16 @@ def load_texture_dataset_as_dataframe(*, image_size = TEXTURE_DS_IMAGE_SIZE, sub
     return df  
 
 
-def save_texture_dataset_as_numpy(*, image_size = TEXTURE_DS_IMAGE_SIZE, subdir, save_prefix):
+def save_texture_dataset_as_numpy(*, image_size = TEXTURE_DS_IMAGE_SIZE, dataset_name, save_prefix):
 
-    X, y = load_texture_dataset(image_size = image_size, subdir = subdir)
+    X, y = load_texture_dataset(image_size = image_size, dataset_name = dataset_name)
 
     np.save(f"{save_prefix}_X.npy", X)
     np.save(f"{save_prefix}_y.npy", y)
 
-def test_load_texture_dataset(*, subdir):
+def test_load_texture_dataset(*, dataset_name):
     
-    X,y = load_texture_dataset(subdir = subdir)
+    X,y = load_texture_dataset(dataset_name = dataset_name)
 
     print()
     print("num_of_samples: ", len(y))
@@ -126,8 +126,8 @@ def test_load_texture_dataset(*, subdir):
     #print(X[0])
 
 
-def test_load_texture_dataset_as_dataframe(*, subdir):
-    df = load_texture_dataset_as_dataframe(subdir)
+def test_load_texture_dataset_as_dataframe(*, dataset_name):
+    df = load_texture_dataset_as_dataframe(dataset_name)
     print()
     print("num_of_samples: ", len(df))
 
