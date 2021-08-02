@@ -48,7 +48,8 @@ def create_dataset( *,
                     image_size = (512, 512),
                     n_channels = 3,
                     output_shape = (128, 128),
-                    n_images_per_class = 256,
+                    n_train_images_per_class = 200,
+                    n_test_images_per_class = 50,
                     rand_seed = 1921
                     ):
 
@@ -70,7 +71,11 @@ def create_dataset( *,
 
     if not os.path.exists(dataset_path):
         os.makedirs(dataset_path)
+
+    if not os.path.exists(dataset_path + os.path.sep + "train"):
         os.makedirs(dataset_path + os.path.sep + "train")
+
+    if not os.path.exists(dataset_path + os.path.sep + "test"):
         os.makedirs(dataset_path + os.path.sep + "test")
 
     create_dataset_from_xy( X = X_train, 
@@ -78,14 +83,14 @@ def create_dataset( *,
                             dataset_path = dataset_path, 
                             subdir = "train",
                             imgaug = imgaug,
-                            n_images_per_class = n_images_per_class)
+                            n_images_per_class = n_train_images_per_class)
 
     create_dataset_from_xy( X = X_test, 
                             y = y_test, 
                             dataset_path = dataset_path, 
                             subdir = "test",
                             imgaug = imgaug,
-                            n_images_per_class = n_images_per_class)
+                            n_images_per_class = n_test_images_per_class)
 
 
     print()
@@ -106,7 +111,8 @@ if __name__ == "__main__":
                     image_size = (512, 512),
                     n_channels = 3,
                     output_shape = (128, 128),
-                    n_images_per_class = 256
+                    n_train_images_per_class = 200,
+                    n_test_images_per_class = 50,
                   )
 
 
