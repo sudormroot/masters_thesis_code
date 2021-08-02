@@ -58,7 +58,8 @@ def create_dataset( *,
 
     print("dataset_path = ", dataset_path)
     print("output_shape = ", output_shape)
-    print("n_images_per_class = ", n_images_per_class)
+    print("n_train_images_per_class = ", n_train_images_per_class)
+    print("n_test_images_per_class = ", n_test_images_per_class)
 
     X, y = load_texture_dataset(image_size = image_size, dataset_name = dataset_name)
 
