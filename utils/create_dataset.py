@@ -8,7 +8,7 @@ libpath = os.path.dirname(os.path.realpath(__file__)) + os.path.sep + ".." + os.
 sys.path.append(libpath)
 
 from texture_dataset import load_texture_dataset
-from imgaug_model import build_augmentation_model
+from imgaug_model import build_util_image_augmentater
 from split_dataset import split_dataset_by_pixel
 
 def create_dataset_from_xy( *, 
@@ -50,7 +50,7 @@ def create_dataset( *,
                     output_shape = (128, 128),
                     n_train_images_per_class = 200,
                     n_test_images_per_class = 50,
-                    rand_seed = 1921
+                    seed = 1921
                     ):
 
     dataset_path = dataset_root + os.path.sep +  dataset_name
@@ -65,9 +65,10 @@ def create_dataset( *,
 
     X_train, y_train, X_test, y_test = split_dataset_by_pixel(X, y)
 
-    imgaug = build_augmentation_model(  input_shape = (*image_size, n_channels),
+    imgaug = build_util_image_augmentater(  
+                                        input_shape = (*image_size, n_channels),
                                         output_shape = output_shape,
-                                        rand_seed = rand_seed
+                                        seed = seed
                                         )
 
     if not os.path.exists(dataset_path):

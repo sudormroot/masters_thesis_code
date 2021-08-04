@@ -8,16 +8,51 @@ import matplotlib.pyplot as plt
 libpath = os.path.dirname(os.path.realpath(__file__)) + os.path.sep + "." 
 sys.path.append(libpath)
 
-from imgaug_model import build_augmentation_model
+from imgaug_model import (build_train_image_augmenter, build_util_image_augmenter)
 
 
-def plot_augmented_samples(X, y, nrows = 2, ncols = 4, subfig_width = 4, subfig_height = 4):
+def plot_augmented_samples_train(dataset, n_samples, strong_imgaug_params, weak_imgaug_params):
+        
+    images = next(iter(dataset))[0][:n_samples]
+       
+    augmented_images = zip(
+        images,
+        build_train_image_augmenter(**weak_imgaug_params)(images),
+        build_train_image_augmenter(**strong_imgaug_params)(images),
+        build_train_image_augmenter(**strong_imgaug_params)(images),
+    )
+    
+
+    row_titles = [
+        "Original:",
+        "Weak augmentation:",
+        "Strong augmentation:",
+        "Strong augmentation:",
+    ]
+    
+    plt.figure(figsize=(n_samples * 2.2, 4 * 2.2), dpi = 100)
+    
+    for column, image_row in enumerate(augmented_images):
+        for row, image in enumerate(image_row):
+            plt.subplot(4, n_samples, row * n_samples + column + 1)
+            plt.imshow(image, vmin=0, vmax=1)
+            if column == 0:
+                plt.title(row_titles[row], loc="left")
+            plt.axis("off")
+
+    plt.tight_layout()
+    plt.show()
+
+
+
+
+def plot_augmented_samples_util(X, y, nrows = 2, ncols = 4, subfig_width = 4, subfig_height = 4):
 
     #X,y = load_mbt_dataset()
 
     #X_train, y_train, X_test, y_test = split_mbt_dataset(X, y)
 
-    img_augmenter = build_augmentation_model()
+    img_augmenter = build_util_image_augmenter()
 
 
     figsize = (ncols * subfig_width, nrows * subfig_height)
@@ -68,12 +103,12 @@ def plot_augmented_samples(X, y, nrows = 2, ncols = 4, subfig_width = 4, subfig_
 
 
 
-def plot_augmented_samples_for_one_image(X, y, nrows = 2, ncols = 4, subfig_width = 4, subfig_height = 4):
+def plot_augmented_samples_for_one_image_util(X, y, nrows = 2, ncols = 4, subfig_width = 4, subfig_height = 4):
     
     #X,y = load_mbt_dataset()
     #X_train, y_train, X_test, y_test = split_mbt_dataset(X, y)
     
-    img_augmenter = build_augmentation_model()
+    img_augmenter = build_util_image_augmenter()
     
     
     figsize = (ncols * subfig_width, nrows * subfig_height) 
