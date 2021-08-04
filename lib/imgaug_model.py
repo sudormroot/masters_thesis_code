@@ -40,8 +40,14 @@ class CustomisedTrainImageAugmenter(keras.layers.Layer):
             keras.layers.InputLayer(input_shape = image_shape),
             #preprocessing.Rescaling(1 / 255),
             keras.layers.experimental.preprocessing.RandomFlip("horizontal"),
-            keras.layers.experimental.preprocessing.RandomTranslation(self.zoom_factor / 2, self.zoom_factor / 2),
-            keras.layers.experimental.preprocessing.RandomZoom((-self.zoom_factor, 0.0), (-self.zoom_factor, 0.0)),
+            keras.layers.experimental.preprocessing.RandomTranslation(
+                                            self.zoom_factor / 2, 
+                                            self.zoom_factor / 2
+                                           ),
+            keras.layers.experimental.preprocessing.RandomZoom(
+                                            (-self.zoom_factor, 0.0), 
+                                            (-self.zoom_factor, 0.0)
+                                        ),
             CustomisedRandomColorAffineLayer(   brightness = brightness, 
                                                 jitter = jitter, 
                                                 name = "color_affine_for_train"),

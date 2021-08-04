@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 libpath = os.path.dirname(os.path.realpath(__file__)) + os.path.sep + "." 
 sys.path.append(libpath)
 
-from imgaug_model import (CustomisedTrainImageAugmenter, build_util_image_augmenter)
+from imgaug_model import (CustomisedTrainImageAugmenter, CustomisedUtilImageAugmenter)
 
 
 def plot_augmented_samples_train(dataset, n_samples, strong_imgaug_params, weak_imgaug_params):
@@ -60,7 +60,7 @@ def plot_augmented_samples_util(X, y, nrows = 2, ncols = 4, subfig_width = 4, su
 
     #X_train, y_train, X_test, y_test = split_mbt_dataset(X, y)
 
-    img_augmenter = build_util_image_augmenter()
+    img_augmenter = CustomisedUtilImageAugmenter()
 
 
     figsize = (ncols * subfig_width, nrows * subfig_height)
@@ -116,7 +116,7 @@ def plot_augmented_samples_for_one_image_util(X, y, nrows = 2, ncols = 4, subfig
     #X,y = load_mbt_dataset()
     #X_train, y_train, X_test, y_test = split_mbt_dataset(X, y)
     
-    img_augmenter = build_util_image_augmenter()
+    img_augmenter = CustomisedUtilImageAugmenter()
     
     
     figsize = (ncols * subfig_width, nrows * subfig_height) 
