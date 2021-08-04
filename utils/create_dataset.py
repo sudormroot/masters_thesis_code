@@ -8,8 +8,11 @@ libpath = os.path.dirname(os.path.realpath(__file__)) + os.path.sep + ".." + os.
 sys.path.append(libpath)
 
 from texture_dataset import load_texture_dataset
-from imgaug_model import build_util_image_augmentater
+from imgaug_model import CustomisedUtilImageAugmenter
 from split_dataset import split_dataset_by_pixel
+
+   
+
 
 def create_dataset_from_xy( *, 
                             X, 
@@ -65,9 +68,9 @@ def create_dataset( *,
 
     X_train, y_train, X_test, y_test = split_dataset_by_pixel(X, y)
 
-    imgaug = build_util_image_augmentater(  
-                                        input_shape = (*image_size, n_channels),
-                                        output_shape = output_shape,
+    imgaug = CustomisedUtilImageAugmenter(  
+                                        image_shape = (*image_size, n_channels),
+                                        target_shape = output_shape,
                                         seed = seed
                                         )
 

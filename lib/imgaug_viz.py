@@ -8,20 +8,28 @@ import matplotlib.pyplot as plt
 libpath = os.path.dirname(os.path.realpath(__file__)) + os.path.sep + "." 
 sys.path.append(libpath)
 
-from imgaug_model import (build_train_image_augmenter, build_util_image_augmenter)
+from imgaug_model import (CustomisedTrainImageAugmenter, build_util_image_augmenter)
 
 
 def plot_augmented_samples_train(dataset, n_samples, strong_imgaug_params, weak_imgaug_params):
         
     images = next(iter(dataset))[0][:n_samples]
        
-    augmented_images = zip(
+    """augmented_images = zip(
         images,
         build_train_image_augmenter(**weak_imgaug_params)(images),
         build_train_image_augmenter(**strong_imgaug_params)(images),
         build_train_image_augmenter(**strong_imgaug_params)(images),
     )
-    
+    """
+
+    augmented_images = zip(
+        images,
+        CustomisedTrainImageAugmenter(**weak_imgaug_params)(images),
+        CustomisedTrainImageAugmenter(**strong_imgaug_params)(images),
+        CustomisedTrainImageAugmenter(**strong_imgaug_params)(images),
+    )
+
 
     row_titles = [
         "Original:",

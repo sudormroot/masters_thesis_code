@@ -13,36 +13,47 @@ sys.path.append(libpath)
 
 import tensorflow as tf
 from tensorflow import keras
-#from tensorflow.keras import layers
-#from tensorflow.keras.layers.experimental import preprocessing
 
 
 # We make it working with keras model save and load
+# ref: 
+# https://keras.io/guides/serialization_and_saving/
+# https://stackoverflow.com/questions/62280161/saving-keras-models-with-custom-layers
 class CustomisedRandomColorAffineLayer(keras.layers.Layer):
 
     def __init__(self, 
                  brightness = 0, 
                  jitter = 0, 
-                 #name = 'CustomisedRandomColorAffineLayer',
+                 name = 'color_affine',
                  **kwargs):
 
         self.brightness = brightness
         self.jitter = jitter
-        
+        #self.brightness = tf.Variable(brightness, name="brightness")
+        #self.jitter = tf.Variable(jitter, name="jitter")
+
         super(CustomisedRandomColorAffineLayer, self).__init__(**kwargs)
+        
 
     def get_config(self):
         
+        #config = super(CustomisedRandomColorAffineLayer, self).get_config()
         config = super().get_config()
 
+
+        #config['brightness'] = self.brightness.numpy()
+        #config['jitter'] = self.jitter.numpy()
 
         config['brightness'] = self.brightness
         config['jitter'] = self.jitter
 
-        print("config = ", config)
+        #print("config = ", config)
 
         return config
 
+    #@classmethod
+    #def from_config(cls, config):
+    #    return cls(**config)
 
     def call(self, images, training = True):
         if training:
