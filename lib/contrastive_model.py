@@ -13,7 +13,7 @@ import tensorflow as tf
 from tensorflow import keras
 
 
-class ContrastiveModel(keras.Model):
+class CustomisedContrastiveModel(keras.Model):
     def __init__(self, 
                  *, 
                  temperature = 0.1,
@@ -24,8 +24,8 @@ class ContrastiveModel(keras.Model):
                  projhead_hidden_dims = (512, ), #one hidden layer by default
                  projhead_output_dim = 512,      #one linear output layer
 
-                 contrastive_image_augmenter,   #augmenter for training contrastive model
-                 classfication_image_augmenter, #augmenter for testing model with linear prober
+                 strong_image_augmenter,   #augmenter for training contrastive model
+                 weak_image_augmenter,     #augmenter for testing model with linear prober
 
                  n_classes, #number of classes
                  ):
