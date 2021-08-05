@@ -10,7 +10,7 @@ sys.path.append(libpath)
 
 from imgaug_model import (CustomisedTrainImageAugmenter, CustomisedUtilImageAugmenter)
 
-
+"""
 def plot_augmented_samples_train(dataset, n_samples, strong_imgaug_params, weak_imgaug_params):
         
     images = next(iter(dataset))[0][:n_samples]
@@ -50,17 +50,17 @@ def plot_augmented_samples_train(dataset, n_samples, strong_imgaug_params, weak_
 
     plt.tight_layout()
     plt.show()
+"""
 
 
 
-
-def plot_augmented_samples_util(X, y, nrows = 2, ncols = 4, subfig_width = 4, subfig_height = 4):
+def plot_augmented_samples(*, X, y, img_augmenter, nrows = 2, ncols = 4, subfig_width = 4, subfig_height = 4):
 
     #X,y = load_mbt_dataset()
 
     #X_train, y_train, X_test, y_test = split_mbt_dataset(X, y)
 
-    img_augmenter = CustomisedUtilImageAugmenter()
+    #img_augmenter = CustomisedUtilImageAugmenter()
 
 
     figsize = (ncols * subfig_width, nrows * subfig_height)
@@ -111,12 +111,12 @@ def plot_augmented_samples_util(X, y, nrows = 2, ncols = 4, subfig_width = 4, su
 
 
 
-def plot_augmented_samples_for_one_image_util(X, y, nrows = 2, ncols = 4, subfig_width = 4, subfig_height = 4):
+def plot_augmented_samples_for_one_image_util(*, X, y, img_augmenter, nrows = 2, ncols = 4, subfig_width = 4, subfig_height = 4):
     
     #X,y = load_mbt_dataset()
     #X_train, y_train, X_test, y_test = split_mbt_dataset(X, y)
     
-    img_augmenter = CustomisedUtilImageAugmenter()
+    #img_augmenter = CustomisedUtilImageAugmenter()
     
     
     figsize = (ncols * subfig_width, nrows * subfig_height) 
