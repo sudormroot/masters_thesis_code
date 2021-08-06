@@ -1,5 +1,6 @@
 .DS_Store
 datasets_new
+datasets_new*
 .ipynb_checkpoints/*
 __pycache__
 refer/__pycache__
