@@ -5,7 +5,6 @@ datasets_new*
 __pycache__
 refer/__pycache__
 lib/__pycache__
-*.pdf
 result.txt
 *.bak
 results
