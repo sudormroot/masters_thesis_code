@@ -2,7 +2,7 @@
 
 timestamp=`date "+%Y%m%d_%H%M%S"`
 
-version="v3"
+version="v4"
 
 echo $timestamp
 
