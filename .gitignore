@@ -7,6 +7,7 @@ refer/__pycache__
 lib/__pycache__
 result.txt
 *.bak
+figures
 results
 results/results.txt
 results/*.pdf
