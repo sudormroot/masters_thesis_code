@@ -15,3 +15,4 @@ dataset/mnist_test.csv
 sessions*
 models*
 checkpoints*
+#data*
