@@ -1,6 +1,6 @@
 #!/bin/sh
 
-version="v7"
+version="v8"
 
 jupyter nbconvert \
         --to pdf thesis_main_$version.ipynb \
